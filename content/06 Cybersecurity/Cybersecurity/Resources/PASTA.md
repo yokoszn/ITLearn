@@ -1,0 +1,1 @@
+PASTA is short for Process for Attack Simulation and Threat Analysis; it is a risk-centric threat modelling framework.

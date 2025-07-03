@@ -1,0 +1,22 @@
+## How to Use This Resource
+
+Emphasize taking your time, Be deliberate in your actions and delve deeper as needed.
+
+This isn’t a bootcamp. It’s not about grinding certifications or speed-running content.  
+It’s about deliberate, layered understanding.
+
+- Be curious
+- Take your time
+- Revisit concepts as you go
+- Build a strong foundation before diving deep
+
+> Slow is smooth. Smooth is fast.
+
+This material is meant to **supplement**, not replace, existing frameworks. It exists to give structure to your self-directed study.
+
+> [!PLEASE READ!]
+> You **WILL NOT** be able to learn it all over night. Be Curious, Be Patient, Take it slow and Have Fun. 
+> 
+> This all takes a lot of dedication - Maintaining a healthy balance is key. 
+> 
+> Make sure your family and friends get time with you, or that you make time to do the hobbies you love.

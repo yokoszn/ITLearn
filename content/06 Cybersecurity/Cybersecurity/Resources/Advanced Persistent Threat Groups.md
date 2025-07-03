@@ -1,0 +1,2 @@
+[[TryHackMe]] #hacking #Learning 
+An advanced persistent threat (APT) is a stealthy threat actor, typically a nation state or state-sponsored group, which gains unauthorized access to a computer network and remains undetected for an extended period.

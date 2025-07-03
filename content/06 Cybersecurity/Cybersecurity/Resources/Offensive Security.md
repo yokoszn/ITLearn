@@ -1,0 +1,8 @@
+[[Bloodhount - Active Directory Sniffing]]
+[[BeEF - Browser Exploitation Framework]]
+[[Rubeus]]
+[[GOAD]]
+[[Defensive Security Tooling]]
+[[Nmap]]
+[[WizardryAtWork/infosec/Red/Metasploit|Metasploit]]
+[[Meterpreter]]

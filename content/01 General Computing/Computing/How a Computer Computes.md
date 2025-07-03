@@ -1,0 +1,21 @@
+d# Additional Resources:
+
+**How a transistor can run code:**  
+[  https://www.youtube.com/watch?v=HjneAhCy2N4](https://www.youtube.com/watch?v=HjneAhCy2N4)
+
+**Building an 8-bit computer from scratch:**  
+[https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
+
+  
+**Building and writing code for a 6502 computer:**  
+[https://www.youtube.com/playlist?list=PLowKtXNTBypFbtuVMUVXNR0z1mu7dp7eH](https://www.youtube.com/playlist?list=PLowKtXNTBypFbtuVMUVXNR0z1mu7dp7eH)
+
+**Image Sources:**
+
+Konstantin Lanzet - CPU Collection Konstantin Lanzet Camera: Canon EOS 400D
+
+[https://en.wikipedia.org/wiki/Intel_8008#/media/File:KL_Intel_C8008-1.jpg](https://en.wikipedia.org/wiki/Intel_8008#/media/File:KL_Intel_C8008-1.jpg)
+
+ArtyomK2707 - Intel i9-14900K
+
+[https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0)

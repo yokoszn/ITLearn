@@ -1,0 +1,4 @@
+- need identity provider (Authentik) lxc with docker underlying
+- remote dev machine 
+- setup windows jellyfin
+- setup self hosted certificate authority with yubikey and thin client
