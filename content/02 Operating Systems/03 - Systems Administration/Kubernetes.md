@@ -1,0 +1,6 @@
+- **Purpose**: Container orchestration platform designed for managing containers across multiple hosts.
+- **Usage**: Best suited for **large-scale** container deployments needing **self-healing, auto-scaling, and high availability**. Kubernetes handles container lifecycle management across clusters of machines.
+- **Interaction**:
+    - **Terraform** can provision Kubernetes clusters.
+    - **Ansible** can automate the deployment and configuration of services within a Kubernetes cluster.
+    - **Docker** serves as the container runtime, but Kubernetes provides more robust orchestration for multi-node clusters.

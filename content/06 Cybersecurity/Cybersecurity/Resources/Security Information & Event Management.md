@@ -1,3 +1,0 @@
-[[Wazuh]]
-[[Sophos]]
-[[Logging]]
