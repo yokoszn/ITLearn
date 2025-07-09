@@ -19,7 +19,7 @@
 [[Cyber Kill Chain]]
 [[Unified Kill Chain]]
 [[Diamond Model]]
-[[Information Technology/06 Cybersecurity/Cybersecurity/Resources/MITRE]]
+[[Security Concepts & Frameworks/MITRE]]
 [[Identity and Access Management]]
 [[Threat Modelling]]
 [[Vulnerability - Cybersecurity]]

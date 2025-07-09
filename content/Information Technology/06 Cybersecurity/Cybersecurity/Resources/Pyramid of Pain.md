@@ -1,0 +1,3 @@
+---
+title: Pyramid of Pain
+---

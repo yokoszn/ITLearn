@@ -51,7 +51,7 @@ IT Help Desk → Systems Administrator → Specialized Role
 ### **[[History of Computing]]**
 ### **[[1. General Computing]]**
 
-[[IT Fundamentals]]
+[[Learning Paths]]
 # **Table of Contents**
 
 1. **Introduction to IT and Computing**
@@ -90,6 +90,6 @@ IT Help Desk → Systems Administrator → Specialized Role
     - Certifications to Consider
     - Helpful Websites and Communities
 
-
+[[Learning Paths]]
 
 ![[Pasted image 20241231004608.png]]
