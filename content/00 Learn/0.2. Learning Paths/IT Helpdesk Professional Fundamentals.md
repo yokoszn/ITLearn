@@ -1,7 +1,7 @@
 ---
 title: IT Helpdesk Professional Fundamentals
 ---
-[[Computer Hardware]]
+[[1.3 Computer Hardware]]
 [[Common Software Suites]]
 [[Computer Networking Basics]]
 [[Operating Systems]]
@@ -12,8 +12,8 @@ title: IT Helpdesk Professional Fundamentals
 [[Difference between Programming and Scripting Languages]]
 
 [[Cyber Security]]
-[[1. General Computing]]
-[[How a Computer Computes]]
+[[1.1 General Computing]]
+[[4. How a Computer Computes]]
 [[How Web servers work]]
 
 [[IT Service Management]]

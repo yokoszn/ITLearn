@@ -2,8 +2,9 @@
 title: Knowledge Base Home
 draft: "true"
 ---
-[[Information Technology]]
+[[2. Information Technology]]
 [[Learning Content Platforms]]
+
 ---
 
 These are key skill sets within each pillar, providing a foundation in IT, Networking and cyber-security. familiarity with each area is essential. Remember, this is a journey—refer back to this guide as you progress, and be patient.
@@ -26,7 +27,7 @@ IT Help Desk → Systems Administrator → Specialized Role
 ---
 ### **The Five Pillars of Cybersecurity**
 
-   [[1. General Computing]]
+   [[1.1 General Computing]]
    
 1. **Computer Networking**
 2. **Programming and Scripting**
@@ -48,8 +49,8 @@ IT Help Desk → Systems Administrator → Specialized Role
 > - Most importantly, enjoy the journey! Look out for areas you're passionate about—you’ll want to specialize later.
 
 ---
-### **[[History of Computing]]**
-### **[[1. General Computing]]**
+### **[[1.2 History of Computing]]**
+### **[[1.1 General Computing]]**
 
 [[Learning Paths]]
 # **Table of Contents**

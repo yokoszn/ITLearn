@@ -1,0 +1,3 @@
+---
+title: Statically Typed Variables
+---

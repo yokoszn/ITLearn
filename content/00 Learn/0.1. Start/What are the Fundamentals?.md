@@ -27,12 +27,12 @@ Ideally, everyone will have a specialty they excel at in addition to a solid bas
 It should not be expected that every one completely master each pillar. The intent is to have a good understanding of them.
 
 
-[[Foundations]]
+
 [[2. Information Technology]]
 [[3. System Administration]]
 [[4. Networking]]
 [[5. Cybersecurity]]
-[[6. Cloud Engineering]]
+[[7. Cloud Engineering]]
 [[7. System Design]]
 [[8. Site Reliability Engineering]]
 
