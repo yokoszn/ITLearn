@@ -4,7 +4,6 @@
 
 Tags:
 [[2. Information Technology]]
-[[Personal Learning]]
 
 # **Resources**
 

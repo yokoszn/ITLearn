@@ -6,7 +6,7 @@ Practical Helpdesk Course
 
 Linux
 [[NDG Linux Essentials]]
-[[CompTIA Linux+ Study Guide]]
+[[CompTIA Linux+]]
 
 Computer Science
 CS50
