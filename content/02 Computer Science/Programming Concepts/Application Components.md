@@ -1,0 +1,112 @@
+---
+title: Application Components
+---
+## Message Queue Systems[](https://www.opsschool.org/application_components_201.html#message-queue-systems "Link to this heading")
+
+In a distributed system a Message Queue Systems can provide a basic infrastructure to higher level functions like
+
+> - decoupling processes or hosts from each other
+>     
+> - parallel processes execution
+>     
+> - distribute events and information like changes to data, entries from logfiles and statistics for monitoring and notification
+>     
+> - data-streaming and file-transfers to multiple hosts via multicast and unicast
+>     
+> - replace polling mechanism with an event orientated system
+>     
+> - network wide accessible job queues
+>     
+> - message rerouting on failure / escalation schemes
+>     
+> - verification of results ( best of three )
+>     
+> - asynchronous remote procedure calls
+>     
+> - network wide mutex
+>     
+> - network or distributed system wide message bus
+>     
+
+Message Queue Systems are more like peer2peer networks then client-server applications. They can be split up into message brokers and routers or brokerless message queuing systems. [[0MQ]](https://www.opsschool.org/application_components_201.html#mq) A message as understood by the system is everything that can be represented as a bytestream. Properties like type and timestamp may are added to message. [[Bok]](https://www.opsschool.org/application_components_201.html#bok)
+
+[[Bok](https://www.opsschool.org/application_components_201.html#id2)]
+
+[http://sardes.inrialpes.fr/papers/files/Bouchenak08a.pdf](http://sardes.inrialpes.fr/papers/files/Bouchenak08a.pdf)
+
+[[0MQ](https://www.opsschool.org/application_components_201.html#id1)]
+
+[https://en.wikipedia.org/wiki/%C3%98MQ](https://en.wikipedia.org/wiki/%C3%98MQ)
+
+### Further Readings[](https://www.opsschool.org/application_components_201.html#further-readings "Link to this heading")
+
+> - [http://c2.com/cgi/wiki?MessageQueuingArchitectures](http://c2.com/cgi/wiki?MessageQueuingArchitectures)
+>     
+> - [https://en.wikipedia.org/wiki/Message-oriented_middleware](https://en.wikipedia.org/wiki/Message-oriented_middleware) and [https://en.wikipedia.org/wiki/Message_oriented_middleware](https://en.wikipedia.org/wiki/Message_oriented_middleware)
+>     
+> - [https://en.wikipedia.org/wiki/Queueing_theory](https://en.wikipedia.org/wiki/Queueing_theory)
+>     
+> - [https://en.wikipedia.org/wiki/Message_queue](https://en.wikipedia.org/wiki/Message_queue)
+>     
+> - [http://www.slideshare.net/mwillbanks/art-of-message-queues](http://www.slideshare.net/mwillbanks/art-of-message-queues)
+>     
+
+## Message Brokers[](https://www.opsschool.org/application_components_201.html#message-brokers "Link to this heading")
+
+Message brokers represent a message queue systems that relies on a central system to route messages to its destination. Messages are send to exchanges and received from queues. Queues resists on the broker, also some protocols implement a client site queue for multipart transactions and prefetching. Message Brokers tend to become a critical system in an otherwise distributed environment.
+
+### RabbitMQ[](https://www.opsschool.org/application_components_201.html#rabbitmq "Link to this heading")
+
+[RabbitMQ](https://www.rabbitmq.com) is an open source Message Broker written in erlang. Its queuing protocol is the Advance Message Queuing Protocol. [[wiki]](https://www.opsschool.org/application_components_201.html#wiki) [[specs]](https://www.opsschool.org/application_components_201.html#specs) It provides plugins for different queuing protocols like STOMP and advanced setups. Installations scale from single host as an applicationmessagebus, to multi cluster installations in different networks. Messages are send to different type of exchanges. While Direct, Fanout, Topic and Header Exchanges are part of the core system, others plugins are rooted in the community. No prior understanding of the erlang programming language is needed to setup, configure and operate the message broker. The documentation on the projects homepage reads a fair amount of different configurations with explanations.
+
+To setup a cluster a minimum of two nodes is required. All nodes of a cluster must be in the same IP network segment. It is possible to send huge messages via AMQP to a RabbitMQ node. The maximum message size is limited by the amount of available RAM on the node. Depending on the durability of a message and the policy of queues, the messages are synchronized to other nodes. A disc-node ensures a message is stored to a disc before delivering. Memory based nodes provide a much higher message throughput. To establish an encrypted communication between nodes, IPSec or TLS can be used. Authentication is possible via an internal database, LDAP, SASL and PKI client certificates. With a PKI in place consumers and publisher can share the same authorization. No preshared password among all processes is needed, but different private keys are mandatory. This is accomplished by using the commonname of the dn in the x509 client certificate as username. Different applications can be separated by the concept of virtual hosts in a similar way the Apache web server does. Configuration is provided by webGUI or commandline tools. Programming libraries and tools for a wide range of environments are available.
+
+The installation from the Debian repository leads to a configuration with a single host. Similar installation instructions are provided for Windows, Solaris and other operation systems.
+
+```
+curl 'https://www.rabbitmq.com/rabbitmq-signing-key-public.asc' | sudo apt-key add -
+echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/sources.d/rabbitmq.list
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install rabbitmq-server
+```
+
+To backup and restore configuration data the management plugin should be configured.
+
+```
+{ rabbitmq_management, [
+    {  listener, [ { port, 15672 },
+                   { ssl, true },
+                   { ssl_opts, [ { cacertfile, "/etc/ssl/certs/cacert.crt" },
+                                 { certfile,   "/etc/ssl/certs/node1.crt" },
+                                 { keyfile,    "/etc/ssl/private/node1.key" } ]}
+                 ]} // configured listener
+]} // configured rabbitmq_management
+]. // EOC
+
+rabbitmqadmin export rabbit.config
+rabbitmqadmin -q import rabbit.config
+```
+
+Show a detailed report about queues, users and connections
+```
+rabbitmqctl report
+```
+
+[[wiki](https://www.opsschool.org/application_components_201.html#id3)]
+[https://en.wikipedia.org/wiki/AMQP](https://en.wikipedia.org/wiki/AMQP)
+[[specs](https://www.opsschool.org/application_components_201.html#id4)]
+[http://www.amqp.org/resources/download](http://www.amqp.org/resources/download)
+### Apache ActiveMQ[](https://www.opsschool.org/application_components_201.html#apache-activemq "Link to this heading")
+
+## Memory Caches[](https://www.opsschool.org/application_components_201.html#memory-caches "Link to this heading")
+
+### Memcached[](https://www.opsschool.org/application_components_201.html#memcached "Link to this heading")
+
+### Redis[](https://www.opsschool.org/application_components_201.html#redis "Link to this heading")
+
+## Specialized Caches[](https://www.opsschool.org/application_components_201.html#specialized-caches "Link to this heading")
+
+### Varnish[](https://www.opsschool.org/application_components_201.html#varnish "Link to this heading")
+
+### nginx+memcached[](https://www.opsschool.org/application_components_201.html#nginx-memcached "Link to this heading")
