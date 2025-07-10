@@ -3,7 +3,7 @@ title: Learning Paths
 ---
 [[IT Helpdesk Professional Fundamentals]]
 [[IT Networking Professional Fundamentals]]
-[[IT Security Professional Fundamentals]]
+[[IT Security Operations Fundamentals]]
 
 [[Virtualization Fundamentals]]
 [[Docker Fundamentals]]

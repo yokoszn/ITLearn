@@ -2,4 +2,4 @@
 title: Personal Development
 ---
 
-[[Soft Skills]]
+[[Soft Skills 101]]

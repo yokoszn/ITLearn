@@ -14,13 +14,13 @@ Whether you’re entering IT for the first time or trying to solidify your knowl
 ![[What are the Fundamentals?]]
 
 ---
-![[How to Use this Resource]]
+![[1. How to Use this Resource]]
 
 >This is actively in development and will change frequently.
 >Written in [Obsidian](https://obsidian.md/about) , published via [Quartz](https://quartz.jzhao.xyz/)
 
 ## Where to Next?
 
-[[Knowledge Base Home]]
+[[3. Knowledge Base Home]]
 [[Related Resources]]
 [[FAQ]]

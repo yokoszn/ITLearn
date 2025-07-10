@@ -1,4 +1,4 @@
-[[Knowledge Base Home]]
+[[3. Knowledge Base Home]]
 It is generally considered bad practice to include passwords, SSH keys, API keys, or any other sensitive information directly in Docker files or GitHub repositories. This is because these files can easily be exposed to unauthorized users, especially if stored in public repositories or insecure environments.
 
 Here are common methods developers use to hide or obfuscate sensitive information such as SSH keys, OpenAI API keys, or passwords in Docker files and GitHub repositories:
