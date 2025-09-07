@@ -8,8 +8,9 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      "TWN Systems": "https://twn.systems",
+      "TWN Commons": "https://discord.gg/kgaMm6WJya",
+      "GitHub": "https://github.com/yokoszn/ITLearn",
     },
   }),
 }

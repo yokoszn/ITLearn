@@ -1,5 +1,6 @@
 ---
 title: Learning Paths
+draft: true
 ---
 [[IT Helpdesk Professional Fundamentals]]
 [[IT Networking Professional Fundamentals]]
