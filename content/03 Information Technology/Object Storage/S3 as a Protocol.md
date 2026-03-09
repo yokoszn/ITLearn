@@ -86,11 +86,16 @@ The real power of S3-as-protocol is **choice**. You are not locked into Amazon. 
 [RustFS](https://github.com/rustfs/rustfs) is a high-performance, S3-compatible object storage server written in Rust. It emerged as a community response to MinIO's licensing changes, offering a modern, permissively licensed alternative.
 
 **Key Features:**
-- Written in Rust for memory safety and performance
-- S3-compatible API
-- Designed as a drop-in replacement for MinIO use cases
-- Active open-source development
-- Lightweight single-binary deployment
+- Written in Rust for memory safety and performance (built on Tokio async runtime)
+- S3-compatible API with V2 and V4 signature support
+- Designed as a drop-in replacement for MinIO use cases (same default ports 9000/9001)
+- Apache 2.0 licensed - fully permissive, no copyleft obligations
+- Claims 2.3x faster than MinIO for small object workloads
+- Strict read-after-write consistency
+- Kubernetes deployment via Helm charts with Prometheus/Grafana observability
+
+> [!WARNING] Early Stage Software
+> RustFS is currently in **alpha** (v1.0.0-alpha as of early 2026). Distributed mode is not yet officially released. Evaluate carefully before using in production or for mission-critical data. For production self-hosted storage today, consider Garage instead.
 
 **Quick Start:**
 
@@ -103,7 +108,7 @@ chmod +x rustfs-linux-amd64
 ./rustfs-linux-amd64 server /data --console-address ":9001"
 ```
 
-**When to choose RustFS:** You want a performant, self-hosted S3 server with a familiar MinIO-like experience but without the AGPL licensing concerns. Good for single-node or small-cluster deployments.
+**When to choose RustFS:** You want a performant, self-hosted S3 server with a familiar MinIO-like experience but without the AGPL licensing concerns. Good for single-node deployments. Watch this project — once it matures past alpha, the Apache 2.0 license and Rust foundation make it a compelling long-term choice.
 
 ---
 
@@ -116,6 +121,9 @@ chmod +x rustfs-linux-amd64
 - **No egress fees** - download your data without penalty
 - Automatic global distribution via Cloudflare's network
 - Workers integration for edge compute alongside storage
+- Storage classes: Standard and Infrequent Access (with retrieval fees)
+- Strong read-after-write consistency
+- "Super Slurper" migration tool for moving data from other S3 providers
 - Free tier: 10 GB storage, 10 million Class B operations/month
 
 **Configuration with standard S3 tools:**
@@ -144,11 +152,13 @@ aws s3 ls s3://my-bucket/
 **Key Features:**
 - Designed for **homelab and small-scale infrastructure**
 - Runs on low-resource machines (Raspberry Pi, small VPS instances)
-- Geo-distributed by design - replicate across locations
+- Geo-distributed by design - replicate data across physical locations
 - S3-compatible API for standard tooling
-- Written in Rust for efficiency
-- AGPL v3 licensed (copyleft, but maintained by a community collective)
-- Simple operational model - no complex dependencies
+- Written in Rust for efficiency — single static binary, minimal dependencies
+- Built-in static website hosting (map domains to buckets)
+- Native Prometheus metrics for monitoring
+- AGPL v3 licensed (copyleft, but maintained by a community collective — not a corporate bait-and-switch risk)
+- Current version: v2.1.0, in production use by Deuxfleurs since 2020
 
 **Architecture:**
 
@@ -208,14 +218,23 @@ api_bind_addr = "[::]:3903"
 
 ### A Note on MinIO
 
-> [!WARNING] MinIO Licensing Changes
-> MinIO was long the default recommendation for self-hosted S3 storage. However, its licensing trajectory raises concerns for sovereign infrastructure:
+> [!WARNING] MinIO: A Cautionary Tale in Open-Source Licensing
+> MinIO was long the default recommendation for self-hosted S3 storage. Its trajectory is a textbook example of the "open-core trap" — build adoption with permissive licensing, then progressively restrict until the free version is unusable:
 >
-> - **2018:** Changed from Apache 2.0 to **GNU AGPL v3** - any network-accessible deployment must share source code of modifications
-> - **2024:** Introduced the **MinIO Enterprise License**, further restricting commercial and large-scale self-hosted use
-> - **Telemetry concerns:** Subnet registration and call-home features added in recent versions
+> | Date | Event |
+> |------|-------|
+> | **Pre-2019** | Released under **Apache 2.0** — fully permissive |
+> | **2019** | Peripheral components moved to **AGPL v3** |
+> | **2021** | Core server moved to **AGPL v3** — network use triggers copyleft |
+> | **2022-2023** | Aggressive license enforcement actions against Nutanix and Weka |
+> | **May 2025** | Web management UI **stripped from community edition** |
+> | **Oct 2025** | Stopped publishing Docker images to Docker Hub and Quay.io |
+> | **Dec 2025** | Entered **maintenance mode** — no new features, no PRs accepted |
+> | **Feb 2026** | Repository **archived** (read-only). Users directed to AIStor ($96K/year) |
 >
-> While MinIO remains technically capable, the licensing direction signals a move away from community-first development. For new deployments focused on long-term sovereignty, consider **RustFS** or **Garage** instead.
+> Organizations that built on MinIO's originally permissive license found themselves progressively locked in with no path forward except paying or migrating. This follows the same pattern as HashiCorp, Elastic, and Redis.
+>
+> **For new deployments, use Garage (production-ready) or RustFS (promising, still in alpha) instead.**
 
 ## Working with S3: Universal Client Tools
 
@@ -279,7 +298,8 @@ s3.upload_file("report.pdf", "documents", "reports/2026/march.pdf")
 | **Min. hardware** | Moderate | None (cloud) | Very low (RPi capable) |
 | **Replication** | Erasure coding | Automatic (managed) | Configurable (1-3+) |
 | **Egress cost** | None (self-hosted) | Free | None (self-hosted) |
-| **License** | Permissive | Proprietary (SaaS) | AGPL v3 |
+| **License** | Apache 2.0 | Proprietary (SaaS) | AGPL v3 |
+| **Maturity** | Alpha (watch closely) | Production | Production (since 2020) |
 | **Sovereignty** | Full control | Cloudflare dependency | Full control |
 
 > [!TIP] Mix and Match
