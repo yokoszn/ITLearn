@@ -21,10 +21,16 @@ Whether you're entering IT for the first time, changing careers, or solidifying 
 
 ## 📚 Featured Learning Paths
 
+### 🖥️ Technical Foundations
 - **🌐 [Networking Fundamentals](/paths/networking)** - Build core networking knowledge from protocols to infrastructure
 - **🐧 [Linux Systems](/paths/linux)** - Master command line, system administration, and server management
 - **⚡ [Site Reliability Engineering](/paths/sre)** - Learn to design, deploy, and maintain resilient systems
 - **🛡️ [VyOS and Proxmox Network Infrastructure](/paths/vyos-proxmox)** - Deploy production-grade routing, DNS, and multi-cluster architectures
+
+### 🏢 Business & Operations
+- **🚀 [Startups Playbook](/business/startups-playbook)** - Build your startup's tech stack with open-source tools
+- **📋 [MSP Content Model](/business/msp-content-model)** - Structure knowledge for scalable IT service delivery
+- **📝 [PIMPyourDocs](/business/pimpyourdocs)** - Own your documentation with plain-text-first practices
 
 > [!TIP] Need help along the way?
 > Join the [TWN Commons on Discord](https://discord.gg/kgaMm6WJya) to ask questions, share progress, and connect with other learners and professionals.
