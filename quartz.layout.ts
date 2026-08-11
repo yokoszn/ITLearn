@@ -8,6 +8,7 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
+      "Dictionary": "/dictionary",
       "TWN Systems": "https://twn.systems",
       "TWN Commons": "https://discord.gg/kgaMm6WJya",
       "GitHub": "https://github.com/yokoszn/ITLearn",
