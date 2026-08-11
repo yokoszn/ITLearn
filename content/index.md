@@ -16,8 +16,8 @@ Whether you're entering IT for the first time, changing careers, or building exp
 
 <div style="display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap;">
   <a href="/getting-started" style="background: #284b63; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Start a Learning Path</a>
-  <a href="https://discord.gg/kgaMm6WJya" style="background: #84a59d; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Join TWN Commons</a>
-  <a href="/dictionary" style="background: #d9822b; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Dictionary</a>
+  <a href="https://discord.gg/kgaMm6WJya" style="background: #84a59d; color: #111; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Join TWN Commons</a>
+  <a href="/dictionary" style="background: #a35a12; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Dictionary</a>
 </div>
 
 ## Featured Learning Paths

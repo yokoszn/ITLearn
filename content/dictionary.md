@@ -39,13 +39,13 @@ This page lists terms and abbreviations used across TWN Learn. If you meet a wor
 
 - **CVE (Common Vulnerabilities and Exposures)** - A public record of a known security vulnerability.
 - **IAM (Identity and Access Management)** - Systems and processes that control who can access what.
-- **MFA (Multi-Factor Authentication)** - A login that requires two or more proofs of identity.
+- **MFA (Multi-Factor Authentication)** - A login that requires two or more different types of authentication factor, such as a password plus a one-time code.
 - **PKI (Public Key Infrastructure)** - The certificates and keys used to secure communications and verify identity.
 - **RBAC (Role-Based Access Control)** - Grants permissions based on a user's role, not the individual user.
 - **SIEM (Security Information and Event Management)** - Tooling that collects and analyses security logs across an environment.
 - **SOC (Security Operations Centre)** - The team that monitors and responds to security threats.
 - **SSH (Secure Shell)** - An encrypted protocol used to access and manage systems remotely.
-- **TLS/SSL (Transport Layer Security/Secure Sockets Layer)** - Protocols that encrypt data in transit, such as HTTPS traffic.
+- **TLS (Transport Layer Security)** - The protocol used to encrypt data in transit, such as HTTPS traffic. SSL (Secure Sockets Layer) is its obsolete predecessor.
 
 ## Systems, Infrastructure and SRE
 

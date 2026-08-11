@@ -11,10 +11,10 @@ Welcome to your structured path toward IT mastery and digital sovereignty. Wheth
 
 ## Who This Is For
 
-**Students** preparing for tech careers
-**Career changers** entering IT from other fields
-**IT professionals** looking to fill knowledge gaps or specialise
-**Digital sovereignty advocates** who want to understand and control their technology stack
+- **Students** preparing for tech careers
+- **Career changers** entering IT from other fields
+- **IT professionals** looking to fill knowledge gaps or specialise
+- **Digital sovereignty advocates** who want to understand and control their technology stack
 
 ## Step 1: Pick Your Path
 
@@ -75,7 +75,7 @@ Don't learn in isolation. The TWN Commons provides support, guidance, and connec
 
 - Dedicate consistent time daily (even 30 minutes helps)
 - Complete one milestone before moving to the next
-- Practice what you learn with hands-on labs and projects
+- Practise what you learn with hands-on labs and projects
 
 ### Community Integration
 
@@ -85,10 +85,10 @@ Don't learn in isolation. The TWN Commons provides support, guidance, and connec
 
 ## Where to Get Help
 
-**Stuck on a concept?** Ask in [TWN Commons](https://discord.gg/kgaMm6WJya)
-**Want to practice?** Explore [TWN Systems](https://twn.systems) for practice environments
-**Found an error?** Contribute fixes via [GitHub](https://github.com/[repository])
-**Need career guidance?** Connect with professionals in the Discord community
+- **Stuck on a concept?** Ask in [TWN Commons](https://discord.gg/kgaMm6WJya)
+- **Want to practise?** Explore [TWN Systems](https://twn.systems) for practice environments
+- **Found an error?** Contribute fixes via [GitHub](https://github.com/yokoszn/ITLearn)
+- **Need career guidance?** Connect with professionals in the Discord community
 
 ## Your Learning Toolkit
 
@@ -110,10 +110,10 @@ Most paths assume you have access to:
 
 ## What Makes TWN Learn Different
 
-**Real-world focus** - Learn skills that matter in production environments
-**Vendor independence** - Understand principles, not just specific products
-**Community-driven** - Content improved by practitioners and learners
-**Digital sovereignty** - Build capability to control your technology choices
+- **Real-world focus** - Learn skills that matter in production environments
+- **Vendor independence** - Understand principles, not just specific products
+- **Community-driven** - Content improved by practitioners and learners
+- **Digital sovereignty** - Build capability to control your technology choices
 
 ## Ready to Begin?
 
