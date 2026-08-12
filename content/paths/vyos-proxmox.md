@@ -19,7 +19,7 @@ Master the deployment and management of production-grade network infrastructure 
 **Level:** Intermediate to Advanced
 **Prerequisites:** Solid networking fundamentals, basic Linux administration, familiarity with virtualization concepts
 
-**Why this matters:** Running VyOS on Proxmox gives you a fully open-source, sovereign network stack. You control your routing, firewalling, VPNs, and DNS — no vendor lock-in, no licensing fees, no phoning home. Combined with Proxmox SDN and PowerDNS, you can build infrastructure that rivals enterprise solutions while maintaining complete ownership.
+**Why this matters:** Running VyOS on Proxmox gives you a fully open-source, self-hosted network stack. You control your routing, firewalling, VPNs, and DNS — no vendor lock-in, no licensing fees, no phoning home. Combined with Proxmox SDN and PowerDNS, you can build infrastructure that rivals enterprise solutions while maintaining complete ownership.
 
 ```
 🏗️ Architecture You'll Build
@@ -56,6 +56,7 @@ Master the deployment and management of production-grade network infrastructure 
 ## ✅ Prerequisites
 
 Before starting this path, you should:
+
 - [ ] Complete or be comfortable with [[paths/networking|Networking Fundamentals]] (especially routing, VLANs, subnetting)
 - [ ] Have working knowledge of Linux command line and system administration
 - [ ] Understand virtualization concepts ([[03 Information Technology/Virtualization/Hypervisors|Hypervisors]], VMs, virtual networking)
@@ -66,9 +67,11 @@ Before starting this path, you should:
 ## 🎯 Learning Milestones
 
 ### 🏗️ Milestone 1: VyOS Fundamentals on Proxmox (Weeks 1-3)
+
 **Goal:** Deploy VyOS as a virtual router on Proxmox and master its configuration model
 
 **Core Concepts:**
+
 - VyOS architecture: Debian-based, configuration tree model, commit/save workflow
 - VyOS image types: rolling vs. LTS (Circinus, Sagitta), building from source
 - Deploying VyOS as a Proxmox VM: CPU, memory, disk, and NIC sizing
@@ -90,6 +93,7 @@ Before starting this path, you should:
 ```
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Download or build a VyOS ISO and create a Proxmox VM with multiple NICs
 - [ ] Install VyOS from ISO, configure initial interfaces, set hostname and credentials
 - [ ] Configure basic routing: static routes, default gateway, source NAT (masquerade)
@@ -99,6 +103,7 @@ Before starting this path, you should:
 - [ ] Set up VyOS firewall zones and basic rulesets (WAN, LAN, DMZ)
 
 **Key Configuration Examples:**
+
 ```bash
 # Basic VyOS interface and NAT setup
 configure
@@ -119,17 +124,14 @@ save
 
 **Checkpoint:** Can you deploy a VyOS VM that provides routing, NAT, DHCP, and DNS forwarding for a Proxmox internal network?
 
-> [!TIP] Need guidance?
-> Join [TWN Commons #networking](https://discord.gg/kgaMm6WJya) to ask questions and discuss VyOS deployments with other learners.
-
-**💬 Share Your Progress:** Post your VyOS interface diagram and firewall zone layout in Discord!
-
 ---
 
 ### 🌐 Milestone 2: Proxmox SDN and VyOS Integration (Weeks 4-6)
+
 **Goal:** Use Proxmox SDN to build software-defined network fabrics and integrate VyOS as the routing gateway
 
 **Core Concepts:**
+
 - Proxmox SDN architecture: zones, VNets, subnets, controllers
 - SDN zone types: Simple, VLAN, QinQ, VXLAN, EVPN
 - How Proxmox SDN interacts with Linux bridges and Open vSwitch (OVS)
@@ -166,6 +168,7 @@ save
 ```
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Enable Proxmox SDN in the datacenter configuration
 - [ ] Create a VLAN zone with multiple VNets and subnets
 - [ ] Attach VMs to different VNets and verify L2 isolation
@@ -176,6 +179,7 @@ save
 - [ ] Configure VyOS as the default gateway for SDN subnets
 
 **Key VyOS VLAN Configuration:**
+
 ```bash
 # VLAN sub-interfaces on VyOS for Proxmox SDN VNets
 configure
@@ -207,14 +211,14 @@ save
 
 **Checkpoint:** Can you build a multi-tier application network using Proxmox SDN VNets with VyOS providing inter-VLAN routing and zone-based firewalling?
 
-**💬 Share Your Progress:** Post your SDN topology diagram and VyOS firewall rules in [TWN Commons #networking](https://discord.gg/kgaMm6WJya)!
-
 ---
 
 ### 🔒 Milestone 3: VyOS VPN and Dynamic Routing (Weeks 7-8)
+
 **Goal:** Connect Proxmox sites with VPN tunnels and dynamic routing protocols
 
 **Core Concepts:**
+
 - WireGuard on VyOS: lightweight, modern, kernel-level VPN
 - IPsec on VyOS: site-to-site IKEv2 tunnels for legacy and standards compliance
 - OSPF on VyOS: link-state routing for internal networks, areas, cost tuning
@@ -239,6 +243,7 @@ save
 ```
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Configure a WireGuard tunnel between two VyOS instances
 - [ ] Run OSPF over the WireGuard tunnel to exchange routes dynamically
 - [ ] Set up an IPsec IKEv2 tunnel as an alternative/backup path
@@ -248,6 +253,7 @@ save
 - [ ] Configure policy-based routing to steer specific traffic over specific tunnels
 
 **Key WireGuard + OSPF Configuration:**
+
 ```bash
 # VyOS-A: WireGuard tunnel
 configure
@@ -274,14 +280,14 @@ save
 > [!TIP] Testing failover?
 > Use `monitor protocol ospf` and `show ip route` on VyOS to watch route convergence in real time. Pull cables (or disconnect VM NICs) to simulate failures.
 
-**💬 Share Your Lab:** Post your multi-site topology and OSPF neighbor output in [TWN Commons #lab-help](https://discord.gg/kgaMm6WJya)!
-
 ---
 
 ### 🔍 Milestone 4: Unbound DNS and Split-Horizon DNS (Weeks 9-10)
+
 **Goal:** Deploy Unbound as a recursive resolver with split-horizon views for internal vs. external DNS resolution
 
 **Core Concepts:**
+
 - Unbound as a validating, recursive, caching DNS resolver
 - Why Unbound over forwarding to public resolvers (privacy, control, DNSSEC validation)
 - Split-horizon DNS: returning different answers based on the client's source network
@@ -317,6 +323,7 @@ save
 ```
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Deploy Unbound on a Proxmox VM (or LXC container)
 - [ ] Configure Unbound as a full recursive resolver (no forwarding, resolves from root)
 - [ ] Enable DNSSEC validation and test with `dig +dnssec`
@@ -328,6 +335,7 @@ save
 - [ ] Set up Unbound logging and monitoring for DNS query analytics
 
 **Key Unbound Split-Horizon Configuration:**
+
 ```yaml
 # /etc/unbound/unbound.conf
 
@@ -372,6 +380,7 @@ forward-zone:
 ```
 
 **VyOS DNS Forwarding Integration:**
+
 ```bash
 # Point VyOS DNS forwarding to Unbound
 configure
@@ -390,14 +399,14 @@ save
 
 **Checkpoint:** Can you set up an Unbound resolver that returns different DNS answers based on whether the query comes from an internal or external network?
 
-**💬 Share Your Setup:** Post your split-horizon DNS test results (`dig` outputs from different source IPs) in [TWN Commons #networking](https://discord.gg/kgaMm6WJya)!
-
 ---
 
 ### 🗄️ Milestone 5: PowerDNS Authoritative Server and Supermaster (Weeks 11-13)
+
 **Goal:** Deploy PowerDNS as your authoritative DNS server with supermaster/superslave replication for automatic zone synchronization across clusters
 
 **Core Concepts:**
+
 - PowerDNS Authoritative Server vs. PowerDNS Recursor vs. dnsdist (the PowerDNS ecosystem)
 - PowerDNS backends: MySQL/MariaDB, PostgreSQL, SQLite, LMDB, BIND-format files
 - Zone management: primary (master) zones, secondary (slave) zones, AXFR/IXFR transfers
@@ -441,6 +450,7 @@ save
 ```
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Deploy PowerDNS Authoritative Server on a Proxmox VM with a PostgreSQL backend
 - [ ] Create zones and records using `pdnsutil` and the PowerDNS REST API
 - [ ] Set up a second PowerDNS instance as a slave and configure zone transfers (AXFR)
@@ -453,6 +463,7 @@ save
 **Key PowerDNS Supermaster Configuration:**
 
 Master (pdns-root) — `pdns.conf`:
+
 ```ini
 # /etc/powerdns/pdns.conf on supermaster
 launch=gpgsql
@@ -479,6 +490,7 @@ default-soa-content=ns1.example.com hostmaster.example.com 0 10800 3600 604800 3
 ```
 
 Slave (pdns-a) — `pdns.conf`:
+
 ```ini
 # /etc/powerdns/pdns.conf on superslave
 launch=gpgsql
@@ -497,6 +509,7 @@ allow-notify-from=10.0.0.53/32
 ```
 
 Superslave database setup:
+
 ```sql
 -- On each slave, register the supermaster
 INSERT INTO supermasters (ip, nameserver, account)
@@ -504,6 +517,7 @@ VALUES ('10.0.0.53', 'ns1.example.com', 'root-master');
 ```
 
 Zone creation on master:
+
 ```bash
 # Create a new zone on the supermaster
 pdnsutil create-zone infra.example.com ns1.example.com
@@ -526,14 +540,14 @@ dig @10.10.1.53 app.infra.example.com A
 > [!WARNING] SOA Serial Discipline
 > Always increment the SOA serial when making changes. PowerDNS can auto-increment for API changes, but manual `pdnsutil` edits need explicit `increase-serial` calls. Slaves only transfer when they see a higher serial number.
 
-**💬 Share Your Architecture:** Post your PowerDNS supermaster/slave topology and test results in [TWN Commons #networking](https://discord.gg/kgaMm6WJya)!
-
 ---
 
 ### 🏢 Milestone 6: Cluster-Specific PowerDNS with Root Supermaster Sync (Weeks 14-16)
+
 **Goal:** Build a production architecture where each Proxmox cluster runs its own PowerDNS instance, all synchronized from a root supermaster, with Unbound providing recursive resolution and split-horizon views
 
 **Core Concepts:**
+
 - Multi-cluster DNS architecture: why each cluster needs local DNS authority
 - Root supermaster as single source of truth for zone data
 - Cluster-local PowerDNS slaves for low-latency, resilient name resolution
@@ -592,6 +606,7 @@ dig @10.10.1.53 app.infra.example.com A
 ```
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Deploy the full stack: root supermaster + per-cluster PowerDNS slaves + per-cluster Unbound resolvers
 - [ ] Configure Unbound to forward internal zones to the local PowerDNS slave
 - [ ] Set up VyOS DHCP to hand out the local Unbound resolver to all VMs
@@ -604,6 +619,7 @@ dig @10.10.1.53 app.infra.example.com A
 - [ ] Configure zone-specific DNSSEC policies and key rotation schedules
 
 **Automation Example — Proxmox VM Hook for DNS Registration:**
+
 ```bash
 #!/bin/bash
 # /var/lib/vz/snippets/dns-register.sh
@@ -633,6 +649,7 @@ fi
 ```
 
 **Full Unbound + PowerDNS Integration:**
+
 ```yaml
 # /etc/unbound/unbound.conf (per-cluster resolver)
 
@@ -685,19 +702,19 @@ forward-zone:
 **Checkpoint:** Can you deploy the full multi-cluster DNS stack where a single zone change on the root supermaster propagates to all clusters, and VMs in each cluster resolve names through VyOS → Unbound → PowerDNS?
 
 > [!WARNING] Production Considerations
+>
 > - Always run at least 2 PowerDNS slaves per cluster for HA
 > - Monitor AXFR transfer status — a stuck transfer means stale records
 > - Keep SOA refresh/retry timers reasonable (refresh: 3600, retry: 900)
 > - Test DNSSEC key rollovers in staging before production
 > - Back up PowerDNS databases — they hold all your zone data
 
-**💬 Share Your Architecture:** Post your full multi-cluster DNS diagram in [TWN Commons #networking](https://discord.gg/kgaMm6WJya)!
-
 ---
 
 ## 📚 Essential Resources
 
 ### Documentation
+
 - [VyOS Documentation](https://docs.vyos.io/) — Official VyOS configuration reference
 - [Proxmox VE Admin Guide](https://pve.proxmox.com/pve-docs/) — Proxmox administration and SDN documentation
 - [PowerDNS Authoritative Documentation](https://doc.powerdns.com/authoritative/) — PowerDNS server configuration
@@ -706,6 +723,7 @@ forward-zone:
 - [RFC 5936](https://www.rfc-editor.org/rfc/rfc5936) — DNS Zone Transfer Protocol (AXFR)
 
 ### Tools and Software
+
 - **VyOS** — Open-source network OS (rolling images free, LTS requires subscription or build from source)
 - **Proxmox VE** — Open-source virtualization platform
 - **PowerDNS** — Authoritative DNS server with database backends
@@ -716,49 +734,15 @@ forward-zone:
 - **Ansible** — Automation for deploying and configuring all components
 
 ### Practice Labs
+
 - **Home Lab Setup** — A single Proxmox host with 32GB+ RAM can run this entire architecture as nested VMs
 - **Nested Virtualization** — Run Proxmox inside Proxmox for multi-cluster testing without extra hardware
 - **VyOS Rolling Images** — Free nightly builds for lab use at [VyOS rolling releases](https://vyos.net/get/nightly-builds/)
 
-## 🤝 Community and Support
-
-**[Join TWN Commons](https://discord.gg/kgaMm6WJya)** for help with:
-- **#networking** — VyOS configuration, routing, VPN, and firewall questions
-- **#lab-help** — Proxmox setup, SDN configuration, and DNS deployment assistance
-- **#infrastructure** — Production architecture design discussions
-- **#study-groups** — Find lab partners to build multi-site topologies together
-
-**🎯 Community Challenges:**
-- **Weekly Lab Share** — Post your VyOS + Proxmox topology diagrams every Friday
-- **DNS Architecture Review** — Monthly challenge to design DNS for specific scenarios
-- **Break and Fix** — Intentionally misconfigure DNS/routing, share symptoms, and let others diagnose
-
-**💬 Share Your Journey:**
-- Post **network diagrams** and **VyOS configs** in #networking
-- Share **PowerDNS automation scripts** and **Unbound configurations**
-- Help others troubleshoot — debugging DNS is one of the best ways to learn
-- Share your **production deployment stories** — successes and failures both teach
-
-## 🌉 Bridge to TWN Systems
-
-This learning path directly enables sovereign infrastructure:
-
-> [!NOTE] Digital Infrastructure Independence
-> Mastering VyOS + Proxmox + PowerDNS gives you:
-> - **Complete network sovereignty** — your routing, firewalling, and DNS run on hardware you control
-> - **No vendor DNS lock-in** — PowerDNS replaces managed DNS services with full control over your zones
-> - **Privacy-preserving resolution** — Unbound resolves from root servers without leaking queries to third parties
-> - **Multi-site resilience** — your infrastructure works even when cloud providers have outages
-
-**🛠️ Apply Your Skills with TWN:**
-- **Self-hosted DNS** — Run authoritative DNS for your domains without third-party nameservers
-- **Sovereign routing** — VyOS replaces expensive commercial routers with full feature parity
-- **Encrypted interconnects** — WireGuard tunnels between sites without trusting transit networks
-- **Community-verified providers** — Deploy on [TWN-listed infrastructure](https://twn.systems) that respects your network choices
-
 ## 🚀 What's Next?
 
 After completing this path, you'll be ready for:
+
 - **[[paths/sre|Site Reliability Engineering]]** — Apply this infrastructure at scale with monitoring and automation
 - **[[paths/linux|Linux Systems]]** — Deepen the OS skills that underpin VyOS, PowerDNS, and Unbound
 - **Advanced BGP** — Internet routing, peering, and running your own ASN
@@ -768,6 +752,7 @@ After completing this path, you'll be ready for:
 ## 🏆 Certification Alignment
 
 This learning path provides strong preparation for:
+
 - **CompTIA Network+** — Networking fundamentals covered extensively in Milestones 1-3
 - **Cisco CCNA** — Routing, switching, VPN, and ACL concepts map directly
 - **Linux Foundation Certified System Administrator (LFCS)** — DNS and network service administration
@@ -780,7 +765,7 @@ This learning path provides strong preparation for:
 
 ## 🔍 Path Quality Assurance
 
-**✅ Community Validated:** Architecture patterns tested in production TWN community deployments.
+**✅ Field Validated:** Architecture patterns tested in production deployments.
 
 **🧪 Lab Tested:** All configurations verified on VyOS rolling/1.4.x and Proxmox VE 8.x with PowerDNS 4.x and Unbound 1.x.
 
@@ -788,8 +773,8 @@ This learning path provides strong preparation for:
 
 **👥 Peer Reviewed:** Reviewed by infrastructure engineers running these stacks in production.
 
-*Last updated: March 2026 | Version 1.0*
+_Last updated: March 2026 | Version 1.0_
 
 ---
 
-**Ready to start?** Begin with Milestone 1 and join the [TWN Commons networking channel](https://discord.gg/kgaMm6WJya) for support and community.
+**Ready to start?** Begin with Milestone 1.

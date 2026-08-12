@@ -10,17 +10,17 @@ draft: true
 
 # Site Reliability Engineering Learning Path
 
-*This learning path is under development.*
+_This learning path is under development._
 
 Learn to design, deploy, and maintain resilient systems that can scale and handle failures gracefully. Master the practices that keep modern applications running smoothly in production.
 
 > [!TIP] Coming Soon
-> This structured learning path is being developed. In the meantime, explore our existing content in [[07 Systems Design & Architecture]] and join the [TWN Commons](https://discord.gg/kgaMm6WJya) **#sre** channel for community support.
+> This structured learning path is being developed. In the meantime, explore our existing content in [[07 Systems Design & Architecture]].
 
 ## What You'll Learn
 
 - Service level objectives and error budgets
-- Monitoring, alerting, and observability  
+- Monitoring, alerting, and observability
 - Incident response and post-mortem analysis
 - Infrastructure as code and automation
 - Load balancing and traffic management
@@ -34,4 +34,4 @@ Learn to design, deploy, and maintain resilient systems that can scale and handl
 
 ---
 
-Want to contribute to this learning path? Join the discussion in [TWN Commons](https://discord.gg/kgaMm6WJya).
+Want to contribute to this learning path? Contribute via [GitHub](https://github.com/yokoszn/ITLearn).

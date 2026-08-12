@@ -7,10 +7,10 @@ tags:
 
 # Dictionary
 
-This page lists terms and abbreviations used across TWN Learn. If you meet a word or acronym you do not understand, check here first. Then ask in Discord if you still need help.
+This page lists terms and abbreviations used across ITLearn. If you meet a word or acronym you do not understand, check here first.
 
 > [!TIP] Missing a term?
-> Tell us if a term is missing or wrong. Post in [TWN Commons](https://discord.gg/kgaMm6WJya) **#help-general**, or send a fix via [GitHub](https://github.com/yokoszn/ITLearn).
+> Tell us if a term is missing or wrong. Send a fix via [GitHub](https://github.com/yokoszn/ITLearn).
 
 ## Computing Fundamentals
 
@@ -61,9 +61,8 @@ This page lists terms and abbreviations used across TWN Learn. If you meet a wor
 - **ITIL (Information Technology Infrastructure Library)** - A widely used framework of best practices for IT service management.
 - **ITSM (IT Service Management)** - The processes used to design, deliver, and support IT services.
 
-## Digital Sovereignty
+## General IT Concepts
 
-- **Digital Sovereignty** - The ability to control and understand the technology you depend on, instead of being locked into a vendor or platform.
 - **Self-Hosting** - Running your own services on infrastructure you control, instead of relying on a third-party provider.
 - **Vendor Lock-in** - A situation where switching away from a provider's product or service becomes costly or impractical.
 
