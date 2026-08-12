@@ -4,13 +4,12 @@ tags:
   - object-storage
   - s3
   - infrastructure
-  - digital-sovereignty
   - self-hosting
 ---
 
 # S3 as a Protocol
 
-Amazon's Simple Storage Service (S3) launched in 2006 as a proprietary cloud storage product. Two decades later, the S3 API has become something far more significant: a **de facto standard protocol** for object storage. Dozens of implementations exist, from self-hosted servers to competing cloud platforms, all speaking the same language. Understanding S3 as a protocol rather than a product is key to building sovereign, vendor-independent infrastructure.
+Amazon's Simple Storage Service (S3) launched in 2006 as a proprietary cloud storage product. Two decades later, the S3 API has become something far more significant: a **de facto standard protocol** for object storage. Dozens of implementations exist, from self-hosted servers to competing cloud platforms, all speaking the same language. Understanding S3 as a protocol rather than a product is key to building vendor-independent infrastructure.
 
 ## How S3 Became a Protocol
 
@@ -63,21 +62,21 @@ Any client that can sign requests and speak HTTP can talk to any S3-compatible s
 
 ### S3 vs. Traditional Filesystems
 
-| Feature | Traditional Filesystem | S3 Object Storage |
-|---------|----------------------|-------------------|
-| Access method | POSIX file paths, mount points | HTTP REST API |
-| Structure | Hierarchical directories | Flat namespace with key prefixes |
-| Metadata | Limited (permissions, timestamps) | Arbitrary key-value headers |
-| Scaling | Vertical (bigger disks) | Horizontal (add more nodes) |
-| Access scope | Local or network mount | Anywhere with HTTP access |
-| Consistency | Immediate | Eventually consistent (historically), now strong consistency |
+| Feature       | Traditional Filesystem            | S3 Object Storage                                            |
+| ------------- | --------------------------------- | ------------------------------------------------------------ |
+| Access method | POSIX file paths, mount points    | HTTP REST API                                                |
+| Structure     | Hierarchical directories          | Flat namespace with key prefixes                             |
+| Metadata      | Limited (permissions, timestamps) | Arbitrary key-value headers                                  |
+| Scaling       | Vertical (bigger disks)           | Horizontal (add more nodes)                                  |
+| Access scope  | Local or network mount            | Anywhere with HTTP access                                    |
+| Consistency   | Immediate                         | Eventually consistent (historically), now strong consistency |
 
 > [!NOTE] When to Use Object Storage
 > Object storage excels at storing **unstructured data at scale**: backups, media files, static assets, log archives, and data lake contents. It is **not** a replacement for block storage (databases) or traditional filesystems (application code, OS files).
 
 ## S3-Compatible Implementations
 
-The real power of S3-as-protocol is **choice**. You are not locked into Amazon. Here are strong options for sovereign infrastructure.
+The real power of S3-as-protocol is **choice**. You are not locked into Amazon. Here are strong options for self-hosted or alternative infrastructure.
 
 ---
 
@@ -86,6 +85,7 @@ The real power of S3-as-protocol is **choice**. You are not locked into Amazon. 
 [RustFS](https://github.com/rustfs/rustfs) is a high-performance, S3-compatible object storage server written in Rust. It emerged as a community response to MinIO's licensing changes, offering a modern, permissively licensed alternative.
 
 **Key Features:**
+
 - Written in Rust for memory safety and performance (built on Tokio async runtime)
 - S3-compatible API with V2 and V4 signature support
 - Designed as a drop-in replacement for MinIO use cases (same default ports 9000/9001)
@@ -117,6 +117,7 @@ chmod +x rustfs-linux-amd64
 [Cloudflare R2](https://developers.cloudflare.com/r2/) is a managed S3-compatible object storage service with a game-changing pricing model: **zero egress fees**.
 
 **Key Features:**
+
 - Full S3 API compatibility (use existing S3 tools and SDKs)
 - **No egress fees** - download your data without penalty
 - Automatic global distribution via Cloudflare's network
@@ -150,6 +151,7 @@ aws s3 ls s3://my-bucket/
 [Garage](https://garagehq.deuxfleurs.fr/) is a lightweight, self-hosted, S3-compatible distributed object storage system built by [Deuxfleurs](https://deuxfleurs.fr/), a French libre hosting collective. It is purpose-built for **geo-distributed clusters on modest hardware**.
 
 **Key Features:**
+
 - Designed for **homelab and small-scale infrastructure**
 - Runs on low-resource machines (Raspberry Pi, small VPS instances)
 - Geo-distributed by design - replicate data across physical locations
@@ -212,7 +214,7 @@ path = "/etc/garage/rpc_secret"
 api_bind_addr = "[::]:3903"
 ```
 
-**When to choose Garage:** You want to run object storage across multiple low-powered machines or locations. Ideal for homelab setups, community infrastructure, or when you want true geographic distribution without enterprise hardware. The Deuxfleurs collective's values align well with digital sovereignty principles.
+**When to choose Garage:** You want to run object storage across multiple low-powered machines or locations. Ideal for homelab setups, community infrastructure, or when you want true geographic distribution without enterprise hardware.
 
 ---
 
@@ -221,16 +223,16 @@ api_bind_addr = "[::]:3903"
 > [!WARNING] MinIO: A Cautionary Tale in Open-Source Licensing
 > MinIO was long the default recommendation for self-hosted S3 storage. Its trajectory is a textbook example of the "open-core trap" — build adoption with permissive licensing, then progressively restrict until the free version is unusable:
 >
-> | Date | Event |
-> |------|-------|
-> | **Pre-2019** | Released under **Apache 2.0** — fully permissive |
-> | **2019** | Peripheral components moved to **AGPL v3** |
-> | **2021** | Core server moved to **AGPL v3** — network use triggers copyleft |
-> | **2022-2023** | Aggressive license enforcement actions against Nutanix and Weka |
-> | **May 2025** | Web management UI **stripped from community edition** |
-> | **Oct 2025** | Stopped publishing Docker images to Docker Hub and Quay.io |
-> | **Dec 2025** | Entered **maintenance mode** — no new features, no PRs accepted |
-> | **Feb 2026** | Repository **archived** (read-only). Users directed to AIStor ($96K/year) |
+> | Date          | Event                                                                     |
+> | ------------- | ------------------------------------------------------------------------- |
+> | **Pre-2019**  | Released under **Apache 2.0** — fully permissive                          |
+> | **2019**      | Peripheral components moved to **AGPL v3**                                |
+> | **2021**      | Core server moved to **AGPL v3** — network use triggers copyleft          |
+> | **2022-2023** | Aggressive license enforcement actions against Nutanix and Weka           |
+> | **May 2025**  | Web management UI **stripped from community edition**                     |
+> | **Oct 2025**  | Stopped publishing Docker images to Docker Hub and Quay.io                |
+> | **Dec 2025**  | Entered **maintenance mode** — no new features, no PRs accepted           |
+> | **Feb 2026**  | Repository **archived** (read-only). Users directed to AIStor ($96K/year) |
 >
 > Organizations that built on MinIO's originally permissive license found themselves progressively locked in with no path forward except paying or migrating. This follows the same pattern as HashiCorp, Elastic, and Redis.
 >
@@ -290,24 +292,24 @@ s3.upload_file("report.pdf", "documents", "reports/2026/march.pdf")
 
 ## Choosing an Implementation
 
-| | RustFS | Cloudflare R2 | Garage |
-|---|---|---|---|
-| **Hosting** | Self-hosted | Managed (Cloudflare) | Self-hosted |
-| **Language** | Rust | N/A (SaaS) | Rust |
-| **Best for** | Single/small cluster | Public content, backups | Geo-distributed, homelab |
-| **Min. hardware** | Moderate | None (cloud) | Very low (RPi capable) |
-| **Replication** | Erasure coding | Automatic (managed) | Configurable (1-3+) |
-| **Egress cost** | None (self-hosted) | Free | None (self-hosted) |
-| **License** | Apache 2.0 | Proprietary (SaaS) | AGPL v3 |
-| **Maturity** | Alpha (watch closely) | Production | Production (since 2020) |
-| **Sovereignty** | Full control | Cloudflare dependency | Full control |
+|                   | RustFS                | Cloudflare R2           | Garage                   |
+| ----------------- | --------------------- | ----------------------- | ------------------------ |
+| **Hosting**       | Self-hosted           | Managed (Cloudflare)    | Self-hosted              |
+| **Language**      | Rust                  | N/A (SaaS)              | Rust                     |
+| **Best for**      | Single/small cluster  | Public content, backups | Geo-distributed, homelab |
+| **Min. hardware** | Moderate              | None (cloud)            | Very low (RPi capable)   |
+| **Replication**   | Erasure coding        | Automatic (managed)     | Configurable (1-3+)      |
+| **Egress cost**   | None (self-hosted)    | Free                    | None (self-hosted)       |
+| **License**       | Apache 2.0            | Proprietary (SaaS)      | AGPL v3                  |
+| **Maturity**      | Alpha (watch closely) | Production              | Production (since 2020)  |
+| **Data control**  | Full control          | Cloudflare dependency   | Full control             |
 
 > [!TIP] Mix and Match
 > Because S3 is a protocol, you can use **multiple backends** simultaneously. Store hot data on Cloudflare R2 for fast global delivery, replicate critical backups to a Garage cluster you control, and use rclone to keep them in sync. Protocol compatibility means no vendor lock-in.
 
-## Digital Sovereignty and Object Storage
+## Vendor Lock-in and Object Storage
 
-S3 compatibility is one of the clearest examples of how protocol standardization enables sovereignty:
+S3 compatibility is one of the clearest examples of how protocol standardization avoids vendor lock-in:
 
 1. **No lock-in** - Switch backends without changing applications
 2. **Self-host option** - Run your own storage on hardware you control
@@ -315,8 +317,7 @@ S3 compatibility is one of the clearest examples of how protocol standardization
 4. **Cost control** - Avoid egress fees and unpredictable pricing
 5. **Resilience** - Replicate across providers and geographies
 
-> [!NOTE] Bridge to TWN
-> Object storage is foundational infrastructure for digital sovereignty. Whether you're hosting a static site, running backups, or building a data platform, controlling your storage layer means controlling your data. Explore sovereign hosting providers at [TWN Systems](https://twn.systems) and discuss storage strategies in the [TWN Commons](https://discord.gg/kgaMm6WJya).
+Whether you're hosting a static site, running backups, or building a data platform, controlling your storage layer means controlling your data.
 
 ## Further Reading
 

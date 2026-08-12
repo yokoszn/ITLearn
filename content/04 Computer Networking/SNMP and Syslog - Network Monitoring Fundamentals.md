@@ -69,14 +69,14 @@ SNMP uses a simple request-response model:
 
 ### SNMP Operations
 
-| Operation   | Direction        | Purpose                                   |
-|-------------|------------------|-------------------------------------------|
-| `GET`       | Manager → Agent  | Retrieve a specific OID value              |
-| `GETNEXT`   | Manager → Agent  | Retrieve the next OID in the MIB tree      |
-| `GETBULK`   | Manager → Agent  | Retrieve large sections of a MIB (v2c/v3)  |
-| `SET`        | Manager → Agent  | Modify a value on the device               |
-| `TRAP`       | Agent → Manager  | Unsolicited alert sent by the agent        |
-| `INFORM`     | Agent → Manager  | Acknowledged trap (v2c/v3)                 |
+| Operation | Direction       | Purpose                                   |
+| --------- | --------------- | ----------------------------------------- |
+| `GET`     | Manager → Agent | Retrieve a specific OID value             |
+| `GETNEXT` | Manager → Agent | Retrieve the next OID in the MIB tree     |
+| `GETBULK` | Manager → Agent | Retrieve large sections of a MIB (v2c/v3) |
+| `SET`     | Manager → Agent | Modify a value on the device              |
+| `TRAP`    | Agent → Manager | Unsolicited alert sent by the agent       |
+| `INFORM`  | Agent → Manager | Acknowledged trap (v2c/v3)                |
 
 ### The MIB and OIDs
 
@@ -105,14 +105,14 @@ iso(1)
 
 **Common OIDs you'll use regularly:**
 
-| OID                    | Name           | Returns                            |
-|------------------------|----------------|------------------------------------|
-| `1.3.6.1.2.1.1.1`     | sysDescr       | Device description                 |
-| `1.3.6.1.2.1.1.3`     | sysUpTime      | Time since last reboot             |
-| `1.3.6.1.2.1.1.5`     | sysName        | Hostname of the device             |
-| `1.3.6.1.2.1.2.2.1.10`| ifInOctets     | Bytes received on an interface     |
-| `1.3.6.1.2.1.2.2.1.16`| ifOutOctets    | Bytes transmitted on an interface  |
-| `1.3.6.1.2.1.25.1.1`  | hrSystemUptime | Host uptime (HOST-RESOURCES-MIB)   |
+| OID                    | Name           | Returns                           |
+| ---------------------- | -------------- | --------------------------------- |
+| `1.3.6.1.2.1.1.1`      | sysDescr       | Device description                |
+| `1.3.6.1.2.1.1.3`      | sysUpTime      | Time since last reboot            |
+| `1.3.6.1.2.1.1.5`      | sysName        | Hostname of the device            |
+| `1.3.6.1.2.1.2.2.1.10` | ifInOctets     | Bytes received on an interface    |
+| `1.3.6.1.2.1.2.2.1.16` | ifOutOctets    | Bytes transmitted on an interface |
+| `1.3.6.1.2.1.25.1.1`   | hrSystemUptime | Host uptime (HOST-RESOURCES-MIB)  |
 
 ---
 
@@ -123,16 +123,19 @@ iso(1)
 The first version of SNMP, still widely supported but considered **insecure**.
 
 **How it works:**
+
 - Uses **community strings** for authentication — essentially a plaintext password sent with every request
 - Default community strings: `public` (read-only) and `private` (read-write)
 - No encryption — all data including the community string travels in cleartext
 
 **Key characteristics:**
+
 - Simple 32-bit counters (wrap around at ~4.3 billion — problematic on high-speed interfaces)
 - Basic error handling
 - Only supports TRAP for agent-initiated messages (no acknowledgment)
 
 **Example — querying with SNMPv1:**
+
 ```bash
 # Get system description using SNMPv1
 snmpget -v1 -c public 192.168.1.1 1.3.6.1.2.1.1.1.0
@@ -149,12 +152,14 @@ snmpwalk -v1 -c public 192.168.1.1 1.3.6.1.2.1.1
 SNMPv2c added performance improvements while keeping the community-string authentication model (the "c" stands for "community").
 
 **Improvements over v1:**
+
 - **GETBULK operation** — retrieve large tables efficiently in a single request instead of walking one OID at a time
 - **INFORM operation** — like TRAP but with acknowledgment, so the manager confirms receipt
 - **64-bit counters** (Counter64) — solves the counter wrap problem on high-speed interfaces (10 Gbps+)
 - Better error handling with more detailed error codes
 
 **Example — querying with SNMPv2c:**
+
 ```bash
 # Get system uptime using SNMPv2c
 snmpget -v2c -c public 192.168.1.1 1.3.6.1.2.1.1.3.0
@@ -174,22 +179,23 @@ SNMPv3 is the current standard and adds proper **authentication, encryption, and
 
 **Security features:**
 
-| Feature          | Description                                              |
-|------------------|----------------------------------------------------------|
-| Authentication   | Verify message sender identity (MD5, SHA, SHA-256, SHA-512) |
-| Encryption       | Encrypt message contents (DES, 3DES, AES-128/192/256)    |
-| Message Integrity| Detect message tampering in transit                      |
-| Access Control   | Fine-grained control over who can access what            |
+| Feature           | Description                                                 |
+| ----------------- | ----------------------------------------------------------- |
+| Authentication    | Verify message sender identity (MD5, SHA, SHA-256, SHA-512) |
+| Encryption        | Encrypt message contents (DES, 3DES, AES-128/192/256)       |
+| Message Integrity | Detect message tampering in transit                         |
+| Access Control    | Fine-grained control over who can access what               |
 
 **SNMPv3 Security Levels:**
 
-| Level            | Auth | Encryption | Use Case                              |
-|------------------|------|------------|---------------------------------------|
-| `noAuthNoPriv`   | No   | No         | Similar to v1/v2c (not recommended)   |
-| `authNoPriv`     | Yes  | No         | Verified sender, readable data        |
-| `authPriv`       | Yes  | Yes        | Full security (recommended)           |
+| Level          | Auth | Encryption | Use Case                            |
+| -------------- | ---- | ---------- | ----------------------------------- |
+| `noAuthNoPriv` | No   | No         | Similar to v1/v2c (not recommended) |
+| `authNoPriv`   | Yes  | No         | Verified sender, readable data      |
+| `authPriv`     | Yes  | Yes        | Full security (recommended)         |
 
 **Example — querying with SNMPv3:**
+
 ```bash
 # SNMPv3 with authentication only (authNoPriv)
 snmpget -v3 -u monitorUser -l authNoPriv \
@@ -210,6 +216,7 @@ snmpwalk -v3 -u monitorUser -l authPriv \
 ```
 
 **Configuring SNMPv3 on a Cisco device:**
+
 ```
 ! Create an SNMPv3 group with read-only access and full security
 snmp-server group MONITORS v3 priv read MONITOR-VIEW
@@ -290,6 +297,7 @@ Common SNMP Traps:
 ```
 
 **Configuring trap destinations on a Cisco device:**
+
 ```
 ! Send traps to the NMS at 10.0.0.50 using SNMPv3
 snmp-server host 10.0.0.50 version 3 priv monitorUser
@@ -334,30 +342,30 @@ Every syslog message contains a **facility** (what generated it) and a **severit
 
 **Syslog Severity Levels (RFC 5424):**
 
-| Level | Keyword       | Description                              | Example                        |
-|-------|---------------|------------------------------------------|--------------------------------|
-| 0     | Emergency     | System is unusable                       | Kernel panic                   |
-| 1     | Alert         | Immediate action required                | Database corruption detected   |
-| 2     | Critical      | Critical conditions                      | Hardware failure               |
-| 3     | Error         | Error conditions                         | Disk write failure             |
-| 4     | Warning       | Warning conditions                       | Filesystem 90% full            |
-| 5     | Notice        | Normal but significant                   | User login from new IP         |
-| 6     | Informational | General information                      | Interface up/down              |
-| 7     | Debug         | Debug-level messages                     | Packet processing details      |
+| Level | Keyword       | Description               | Example                      |
+| ----- | ------------- | ------------------------- | ---------------------------- |
+| 0     | Emergency     | System is unusable        | Kernel panic                 |
+| 1     | Alert         | Immediate action required | Database corruption detected |
+| 2     | Critical      | Critical conditions       | Hardware failure             |
+| 3     | Error         | Error conditions          | Disk write failure           |
+| 4     | Warning       | Warning conditions        | Filesystem 90% full          |
+| 5     | Notice        | Normal but significant    | User login from new IP       |
+| 6     | Informational | General information       | Interface up/down            |
+| 7     | Debug         | Debug-level messages      | Packet processing details    |
 
 > [!TIP] Remember the severity levels
 > A common mnemonic: **"Every Alley Cat Eats Watery Noodle In Dishes"** (Emergency, Alert, Critical, Error, Warning, Notice, Informational, Debug). Lower number = higher severity.
 
 **Syslog Facilities:**
 
-| Code | Facility         | Description                    |
-|------|------------------|--------------------------------|
-| 0    | kern             | Kernel messages                |
-| 1    | user             | User-level messages            |
-| 3    | daemon           | System daemons                 |
-| 4    | auth             | Authentication/security        |
-| 10   | authpriv         | Private authentication         |
-| 16-23| local0-local7    | Custom/locally defined use     |
+| Code  | Facility      | Description                |
+| ----- | ------------- | -------------------------- |
+| 0     | kern          | Kernel messages            |
+| 1     | user          | User-level messages        |
+| 3     | daemon        | System daemons             |
+| 4     | auth          | Authentication/security    |
+| 10    | authpriv      | Private authentication     |
+| 16-23 | local0-local7 | Custom/locally defined use |
 
 **Priority value** is calculated as: `Priority = (Facility × 8) + Severity`
 
@@ -382,6 +390,7 @@ Example:
 ### Configuring Syslog
 
 **On a Cisco device:**
+
 ```
 ! Send logs to syslog server
 logging host 10.0.0.50
@@ -400,6 +409,7 @@ logging source-interface Loopback0
 ```
 
 **On a Linux server (rsyslog):**
+
 ```bash
 # /etc/rsyslog.conf — accept remote syslog via UDP
 module(load="imudp")
@@ -417,6 +427,7 @@ template(name="RemoteLogs" type="string"
 ```
 
 **On a Linux server (syslog-ng):**
+
 ```
 source s_network {
     udp(port(514));
@@ -435,11 +446,11 @@ log {
 
 ### Syslog Transport Protocols
 
-| Transport | Port | Reliability | Security | Use Case                      |
-|-----------|------|-------------|----------|-------------------------------|
-| UDP       | 514  | Unreliable  | None     | Traditional, most common      |
-| TCP       | 514  | Reliable    | None     | When you can't afford lost logs|
-| TLS       | 6514 | Reliable    | Encrypted| Compliance, sensitive environments |
+| Transport | Port | Reliability | Security  | Use Case                           |
+| --------- | ---- | ----------- | --------- | ---------------------------------- |
+| UDP       | 514  | Unreliable  | None      | Traditional, most common           |
+| TCP       | 514  | Reliable    | None      | When you can't afford lost logs    |
+| TLS       | 6514 | Reliable    | Encrypted | Compliance, sensitive environments |
 
 > [!WARNING] UDP syslog can lose messages
 > Traditional syslog over UDP is fire-and-forget — messages can be lost due to network congestion, buffer overflows, or packet drops. For production environments, use **TCP or TLS** transport to ensure log delivery. This matters for compliance and forensic analysis.
@@ -450,14 +461,14 @@ log {
 
 In practice, you use both protocols together for comprehensive network monitoring:
 
-| Aspect           | SNMP                                    | Syslog                               |
-|------------------|-----------------------------------------|--------------------------------------|
-| **Purpose**      | Metrics, status, configuration          | Event logs, audit trails             |
-| **Model**        | Poll (request/response) + Traps        | Push (device sends logs)             |
-| **Data Type**    | Structured (OID/value pairs)            | Unstructured text messages           |
-| **Transport**    | UDP 161 (queries), UDP 162 (traps)      | UDP/TCP 514, TLS 6514               |
-| **Best For**     | Bandwidth, CPU, uptime, interface stats | Login events, config changes, errors |
-| **Alerting**     | Threshold-based (poll and compare)      | Pattern matching on log messages     |
+| Aspect        | SNMP                                    | Syslog                               |
+| ------------- | --------------------------------------- | ------------------------------------ |
+| **Purpose**   | Metrics, status, configuration          | Event logs, audit trails             |
+| **Model**     | Poll (request/response) + Traps         | Push (device sends logs)             |
+| **Data Type** | Structured (OID/value pairs)            | Unstructured text messages           |
+| **Transport** | UDP 161 (queries), UDP 162 (traps)      | UDP/TCP 514, TLS 6514                |
+| **Best For**  | Bandwidth, CPU, uptime, interface stats | Login events, config changes, errors |
+| **Alerting**  | Threshold-based (poll and compare)      | Pattern matching on log messages     |
 
 **Example monitoring stack:**
 
@@ -508,23 +519,8 @@ Comprehensive Monitoring Architecture
 - [OID Repository](http://www.oid-info.com/) — Browse and search the global OID tree
 - [Cisco SNMP Configuration Guide](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/xe-16/snmp-xe-16-book.html) — Vendor-specific setup
 
-## 🤝 Community Support
-
-> [!TIP] Need guidance?
-> Join the [TWN Commons on Discord](https://discord.gg/kgaMm6WJya) to ask questions and connect with other learners.
-
-**Relevant channels:**
-- **#networking** — SNMP and syslog configuration questions
-- **#sre** — Monitoring architecture and tool selection
-- **#lab-help** — Troubleshooting your monitoring lab setup
-
-## 🌉 Bridge to TWN
-
-> [!NOTE] Bridge to TWN
-> Self-hosted monitoring is a cornerstone of digital sovereignty. By running your own SNMP polling and syslog collection, you keep full visibility into your infrastructure without sending telemetry data to third-party cloud services. Explore sovereign monitoring solutions and hosting providers at [TWN Systems](https://twn.systems).
-
 ---
 
 **Related topics:** [[Common Network Protocols and their Uses]] | [[Common Ports and their Uses]] | [[Network Troubleshooting Tools]]
 
-*Last updated: March 2026*
+_Last updated: March 2026_

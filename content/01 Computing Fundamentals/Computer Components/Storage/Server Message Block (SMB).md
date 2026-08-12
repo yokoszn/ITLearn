@@ -37,6 +37,7 @@ SMB File Sharing - How It Works
 The original widely-deployed version, also known as [[CIFS]] (Common Internet File System). Microsoft introduced SMB 1.0 with Windows NT 4.0.
 
 **Key characteristics:**
+
 - Chatty protocol with many round-trips per operation
 - Opportunistic locking (oplocks) for caching
 - NetBIOS over TCP/IP for name resolution and transport
@@ -44,6 +45,7 @@ The original widely-deployed version, also known as [[CIFS]] (Common Internet Fi
 - Maximum file size: theoretically unlimited but practically limited by implementation
 
 **Security concerns:**
+
 - No encryption of data in transit
 - Vulnerable to man-in-the-middle attacks
 - The **EternalBlue** exploit (CVE-2017-0144) targeted SMB 1.0 and enabled the WannaCry and NotPetya ransomware outbreaks
@@ -56,6 +58,7 @@ The original widely-deployed version, also known as [[CIFS]] (Common Internet Fi
 **Disabling SMB 1.0:**
 
 Windows (PowerShell):
+
 ```powershell
 # Check SMB1 status
 Get-SmbServerConfiguration | Select EnableSMB1Protocol
@@ -68,6 +71,7 @@ Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
 ```
 
 Linux (Samba):
+
 ```ini
 # /etc/samba/smb.conf
 [global]
@@ -81,6 +85,7 @@ Linux (Samba):
 Introduced with Windows Vista and Windows Server 2008, SMB 2.0 was a major overhaul that addressed the performance and security shortcomings of SMB 1.0.
 
 **Improvements over SMB 1.0:**
+
 - **Reduced chattiness** - Compound commands combine multiple operations into a single request
 - **Pipelining** - Send multiple requests without waiting for responses
 - **Larger reads/writes** - Buffer sizes increased from 64 KB to 1 MB
@@ -93,6 +98,7 @@ Introduced with Windows Vista and Windows Server 2008, SMB 2.0 was a major overh
 Released with Windows 7 and Windows Server 2008 R2.
 
 **Additions:**
+
 - **BranchCache support** - Content caching for branch office scenarios
 - **Larger MTU support** - Improved performance on high-speed networks
 - **Lease oplocks** - More efficient client caching mechanism
@@ -102,6 +108,7 @@ Released with Windows 7 and Windows Server 2008 R2.
 Introduced with Windows 8 and Windows Server 2012. This was a transformative release focused on datacenter and cloud workloads.
 
 **Major features:**
+
 - **SMB Encryption** - AES-128-CCM end-to-end encryption without requiring IPsec
 - **SMB Direct (RDMA)** - Remote Direct Memory Access support for high-throughput, low-latency access
 - **SMB Multichannel** - Aggregate multiple network connections for bandwidth and failover
@@ -127,6 +134,7 @@ SMB 3.0 Multichannel - Bandwidth Aggregation
 Released with Windows 8.1 and Windows Server 2012 R2.
 
 **Additions:**
+
 - Ability to disable SMB 1.0 without removing the feature
 - Improved performance for clustered shared volumes
 
@@ -135,12 +143,14 @@ Released with Windows 8.1 and Windows Server 2012 R2.
 Released with Windows 10 and Windows Server 2016. The current and most secure version.
 
 **Security enhancements:**
+
 - **AES-128-GCM encryption** - More efficient authenticated encryption (in addition to AES-128-CCM)
 - **Pre-authentication integrity** - SHA-512 hash protects the negotiate and session setup exchange from tampering
 - **Cluster dialect fencing** - Prevents downgrade attacks in failover clusters
 - **Encryption negotiation** - Mandatory encryption can be required per-share
 
 **Added in later updates (Windows Server 2022 / Windows 11):**
+
 - **AES-256-GCM and AES-256-CCM** encryption
 - **SMB over QUIC** - Access file shares over the internet without VPN (port 443)
 - **SMB compression** - Compress data in transit for better WAN performance
@@ -167,6 +177,7 @@ Samba is the open-source implementation of SMB/CIFS for Unix/Linux systems. It e
 Samba allows Linux servers to share files and printers with Windows, macOS, and Linux clients.
 
 **Installation:**
+
 ```bash
 # Debian/Ubuntu
 sudo apt install samba samba-common-bin
@@ -179,6 +190,7 @@ sudo pacman -S samba
 ```
 
 **Basic configuration (`/etc/samba/smb.conf`):**
+
 ```ini
 [global]
     workgroup = WORKGROUP
@@ -223,6 +235,7 @@ sudo pacman -S samba
 ```
 
 **User management:**
+
 ```bash
 # Add a system user (if not existing)
 sudo useradd -M -s /usr/sbin/nologin smbuser
@@ -244,6 +257,7 @@ sudo chmod 2770 /srv/samba/shared
 ```
 
 **Service management:**
+
 ```bash
 # Start and enable Samba
 sudo systemctl enable --now smbd nmbd
@@ -258,6 +272,7 @@ smbclient -L //localhost -U smbuser
 ### Samba as an Active Directory Domain Controller
 
 Samba 4 can function as a full Active Directory Domain Controller, providing:
+
 - Kerberos authentication (KDC)
 - LDAP directory services
 - DNS server
@@ -265,6 +280,7 @@ Samba 4 can function as a full Active Directory Domain Controller, providing:
 - Domain join for Windows clients
 
 **Provisioning a new AD domain:**
+
 ```bash
 # Install Samba with AD support
 sudo apt install samba krb5-user smbclient winbind
@@ -294,6 +310,7 @@ sudo systemctl enable --now samba-ad-dc
 ```
 
 **Verify the domain controller:**
+
 ```bash
 # Test DNS
 host -t SRV _ldap._tcp.corp.example.com localhost
@@ -310,7 +327,7 @@ smbclient //localhost/netlogon -U administrator -c 'ls'
 ```
 
 > [!TIP] Samba AD vs Microsoft AD
-> Samba's AD implementation is compatible with Windows AD but has some limitations around advanced Group Policy features and certain newer AD schema extensions. For environments that need full AD feature parity, consider running Windows Server AD DCs alongside Samba for specific services. Samba AD is excellent for smaller environments or as a sovereignty-preserving alternative.
+> Samba's AD implementation is compatible with Windows AD but has some limitations around advanced Group Policy features and certain newer AD schema extensions. For environments that need full AD feature parity, consider running Windows Server AD DCs alongside Samba for specific services. Samba AD is excellent for smaller environments or as a self-hosted alternative.
 
 ## Active Directory File Sharing
 
@@ -362,11 +379,13 @@ Active Directory File Sharing Architecture
 File access in Windows/AD environments uses two layers of permissions:
 
 **Share Permissions** (apply only to network access):
+
 - Full Control, Change, Read
 - Apply at the share level
 - Best practice: Set to "Authenticated Users: Full Control" and control access via NTFS permissions
 
 **NTFS Permissions** (apply to both local and network access):
+
 - Full Control, Modify, Read & Execute, List Folder Contents, Read, Write
 - Support inheritance from parent folders
 - Allow granular per-user and per-group control
@@ -407,6 +426,7 @@ which server hosts what           underlying servers
 ```
 
 **Benefits:**
+
 - Server migration is transparent to users
 - Load balancing across multiple servers via DFS Replication
 - Simplified access paths for end users
@@ -415,6 +435,7 @@ which server hosts what           underlying servers
 ### Group Policy for File Shares
 
 Map network drives automatically using Group Policy:
+
 - **Group Policy Preferences > Drive Maps** - Map drives based on group membership
 - **Folder Redirection** - Redirect Desktop, Documents, etc. to network shares
 - **Offline Files** - Cache network files for disconnected use
@@ -547,31 +568,25 @@ sudo smbstatus -L
 
 ## Troubleshooting
 
-| Symptom | Possible Cause | Solution |
-|---------|---------------|----------|
-| "Access Denied" | Permission mismatch | Check both share and NTFS permissions; verify group membership |
-| Cannot browse shares | NetBIOS disabled or firewall | Ensure port 445 is open; check `Computer Browser` service |
-| Slow file transfers | SMB 1.0 in use or no multichannel | Verify negotiated dialect with `Get-SmbConnection`; check NIC config |
-| "The specified network name is no longer available" | Signing/encryption mismatch | Ensure both sides agree on signing and encryption requirements |
-| Linux mount fails | Missing `cifs-utils` package | Install `cifs-utils`; check `vers=` mount option |
-| Intermittent disconnects | Durable handles not supported | Upgrade to SMB 3.x; check for network instability |
+| Symptom                                             | Possible Cause                    | Solution                                                             |
+| --------------------------------------------------- | --------------------------------- | -------------------------------------------------------------------- |
+| "Access Denied"                                     | Permission mismatch               | Check both share and NTFS permissions; verify group membership       |
+| Cannot browse shares                                | NetBIOS disabled or firewall      | Ensure port 445 is open; check `Computer Browser` service            |
+| Slow file transfers                                 | SMB 1.0 in use or no multichannel | Verify negotiated dialect with `Get-SmbConnection`; check NIC config |
+| "The specified network name is no longer available" | Signing/encryption mismatch       | Ensure both sides agree on signing and encryption requirements       |
+| Linux mount fails                                   | Missing `cifs-utils` package      | Install `cifs-utils`; check `vers=` mount option                     |
+| Intermittent disconnects                            | Durable handles not supported     | Upgrade to SMB 3.x; check for network instability                    |
 
 ## SMB vs NFS Comparison
 
-| Feature | SMB | [[Network File System (NFS)\|NFS]] |
-|---------|-----|-----|
-| Primary OS | Windows | Linux/Unix |
-| Authentication | NTLM / Kerberos / AD | Kerberos / AUTH_SYS (IP-based) |
-| Encryption | Built-in (SMB 3.0+) | Kerberos or TLS (NFSv4) |
-| Port | 445 | 2049 |
-| Lock management | Built-in | NLM (v3) / built-in (v4) |
-| Performance | Good; Multichannel in 3.0+ | Generally faster on Linux |
-| Windows support | Native | Requires NFS client feature |
-| Linux support | Via CIFS/Samba | Native |
-| Best for | Mixed OS, AD environments | Linux-only environments |
-
-> [!TIP] Need guidance?
-> Join the [TWN Commons on Discord](https://discord.gg/kgaMm6WJya) to ask questions about file sharing, Samba configuration, or Active Directory setup.
-
-> [!NOTE] Bridge to TWN
-> Understanding SMB and file sharing gives you the power to build your own sovereign file infrastructure. Instead of relying on cloud storage providers, deploy self-hosted file servers with Samba and maintain full control over your data. Explore sovereignty-focused hosting options at [TWN Systems](https://twn.systems).
+| Feature         | SMB                        | [[Network File System (NFS)\|NFS]] |
+| --------------- | -------------------------- | ---------------------------------- |
+| Primary OS      | Windows                    | Linux/Unix                         |
+| Authentication  | NTLM / Kerberos / AD       | Kerberos / AUTH_SYS (IP-based)     |
+| Encryption      | Built-in (SMB 3.0+)        | Kerberos or TLS (NFSv4)            |
+| Port            | 445                        | 2049                               |
+| Lock management | Built-in                   | NLM (v3) / built-in (v4)           |
+| Performance     | Good; Multichannel in 3.0+ | Generally faster on Linux          |
+| Windows support | Native                     | Requires NFS client feature        |
+| Linux support   | Via CIFS/Samba             | Native                             |
+| Best for        | Mixed OS, AD environments  | Linux-only environments            |

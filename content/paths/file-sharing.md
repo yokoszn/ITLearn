@@ -18,7 +18,7 @@ Master the protocols, tools, and architectures that power file sharing across ne
 **Level:** Beginner to Intermediate
 **Prerequisites:** Basic networking knowledge, Linux command line familiarity
 
-**Why file sharing matters:** Every organization needs to store, share, and protect files across a network. Understanding file sharing protocols and infrastructure is essential for system administrators, help desk professionals, and anyone managing IT environments. These skills also empower you to build sovereign file infrastructure instead of depending on proprietary cloud storage.
+**Why file sharing matters:** Every organization needs to store, share, and protect files across a network. Understanding file sharing protocols and infrastructure is essential for system administrators, help desk professionals, and anyone managing IT environments.
 
 ```
 🗂️ File Sharing Landscape You'll Master
@@ -47,6 +47,7 @@ Master the protocols, tools, and architectures that power file sharing across ne
 ## ✅ Prerequisites
 
 Before starting this path, you should:
+
 - [ ] Understand basic networking concepts (IP addressing, DNS, ports)
 - [ ] Be comfortable with Linux command line basics (`ls`, `cd`, `chmod`, `nano`/`vim`)
 - [ ] Have access to a lab environment (VMs or physical machines)
@@ -56,9 +57,11 @@ Before starting this path, you should:
 ## 🎯 Learning Milestones
 
 ### 📡 Milestone 1: File Sharing Fundamentals (Weeks 1-2)
+
 **Goal:** Understand how network file sharing works and the role of key protocols
 
 **Core Concepts:**
+
 - What is network file sharing and how does it differ from local storage?
 - [[Server Message Block (SMB)|SMB protocol]] — history, versions (1.0 through 3.1.1), and architecture
 - [[Network File System (NFS)|NFS protocol]] — design philosophy and use cases
@@ -67,6 +70,7 @@ Before starting this path, you should:
 - Ports, authentication methods, and transport security
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Use `smbclient` to browse and connect to an SMB share
 - [ ] Mount an SMB share on Linux using `mount -t cifs`
 - [ ] Use Wireshark to capture and analyze SMB traffic — identify the negotiated dialect
@@ -74,15 +78,12 @@ Before starting this path, you should:
 
 **Checkpoint:** Can you explain the difference between SMB 1.0, 2.x, and 3.x, and why version selection matters for security?
 
-**💬 Share Your Progress:** Post your Wireshark SMB captures in [TWN Commons #networking](https://discord.gg/kgaMm6WJya) and identify the protocol version!
-
-> [!TIP] Stuck on concepts?
-> Join [TWN Commons #networking](https://discord.gg/kgaMm6WJya) to ask questions and discuss with other learners.
-
 ### 🐧 Milestone 2: Samba Server Deployment (Weeks 3-4)
+
 **Goal:** Deploy and configure a Samba file server on Linux
 
 **Core Concepts:**
+
 - Samba architecture — `smbd`, `nmbd`, `winbindd` daemons
 - Configuration file structure (`/etc/samba/smb.conf`)
 - Samba user management vs system users (`smbpasswd`, `pdbedit`)
@@ -90,6 +91,7 @@ Before starting this path, you should:
 - VFS modules — recycle bin, audit logging, shadow copies
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Install and configure Samba on a Linux VM
 - [ ] Create multiple shares with different access levels (public read-only, group read-write, private)
 - [ ] Set up Samba users and group-based permissions
@@ -100,15 +102,15 @@ Before starting this path, you should:
 
 **Checkpoint:** Can you configure a Samba server with multiple shares, each restricted to specific user groups?
 
-**💬 Share Your Progress:** Post your `smb.conf` (with sensitive data removed) in [TWN Commons #lab-help](https://discord.gg/kgaMm6WJya) for feedback!
-
 > [!TIP] Lab Tip
 > Use VirtualBox or libvirt/KVM to create a small lab: one Linux server running Samba and one or two clients (Windows and Linux). This gives you a realistic testing environment.
 
 ### 🏢 Milestone 3: Active Directory Integration (Weeks 5-6)
+
 **Goal:** Integrate file sharing with Active Directory for centralized authentication and access control
 
 **Core Concepts:**
+
 - Active Directory fundamentals — domains, forests, OUs, Group Policy
 - Kerberos authentication flow for file access
 - Share permissions vs NTFS/POSIX permissions (layered access control)
@@ -118,6 +120,7 @@ Before starting this path, you should:
 - Samba as an AD Domain Controller vs joining an existing domain
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Set up a Samba Active Directory Domain Controller
 - [ ] Join a Linux server to the AD domain using `realm join` or `net ads join`
 - [ ] Create AD users and security groups, then apply them to file shares
@@ -127,15 +130,15 @@ Before starting this path, you should:
 
 **Checkpoint:** Can you deploy a file server that authenticates users against Active Directory and restricts access based on group membership?
 
-**💬 Share Your Progress:** Document your AD integration setup in [TWN Commons #lab-help](https://discord.gg/kgaMm6WJya)!
-
 > [!TIP] Active Directory Lab
 > You can build a complete AD lab using only free software: Samba AD DC on Linux replaces a Windows Server DC. Add a Windows 10/11 VM (evaluation license) as a domain client to test the full experience.
 
 ### 🔐 Milestone 4: Security Hardening (Weeks 7-8)
+
 **Goal:** Secure file sharing infrastructure against common attacks and misconfigurations
 
 **Core Concepts:**
+
 - SMB protocol security — why SMB 1.0 must be disabled (EternalBlue, WannaCry)
 - Encryption in transit — SMB 3.x encryption, SMB signing
 - NTLM relay attacks and mitigations
@@ -145,22 +148,23 @@ Before starting this path, you should:
 - SMB over QUIC for secure remote access without VPN
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Disable SMB 1.0 on both Windows and Samba servers
 - [ ] Enable and enforce SMB signing and encryption
 - [ ] Configure Samba to require NTLMv2 (disable NTLMv1 and LM)
 - [ ] Set up file access auditing (Windows Event Logs / Samba VFS `full_audit`)
 - [ ] Write firewall rules that restrict SMB traffic to trusted subnets only
 - [ ] Scan your file server with `nmap` to verify only expected ports are open
-- [ ] **TWN Challenge:** Deploy a fully encrypted, audited file server using only open-source tools
+- [ ] Deploy a fully encrypted, audited file server using only open-source tools
 
 **Checkpoint:** Can you harden a file server so that it only accepts encrypted SMB 3.x connections with mandatory signing and logs all file access?
 
-**💬 Security Review:** Post your hardening checklist in [TWN Commons #cybersecurity](https://discord.gg/kgaMm6WJya) for peer review!
-
 ### 🏗️ Milestone 5: Advanced Architectures (Weeks 9-10)
+
 **Goal:** Design file sharing solutions for availability, performance, and scale
 
 **Core Concepts:**
+
 - DFS Replication — multi-site file synchronization
 - SMB Multichannel — aggregating network bandwidth
 - SMB Direct (RDMA) — low-latency high-throughput file access
@@ -170,6 +174,7 @@ Before starting this path, you should:
 - Hybrid and multi-protocol file servers (serve SMB and NFS from the same data)
 
 **🛠️ Hands-on Practice:**
+
 - [ ] Configure SMB Multichannel between a client and server with multiple NICs
 - [ ] Set up DFS Namespaces to abstract share locations
 - [ ] Deploy a multi-protocol file server (Samba + NFS serving the same data)
@@ -178,17 +183,17 @@ Before starting this path, you should:
 
 **Checkpoint:** Can you design a file sharing architecture that provides redundancy, acceptable performance, and centralized management for a multi-site organization?
 
-**💬 Share Your Design:** Post your architecture diagrams in [TWN Commons #networking](https://discord.gg/kgaMm6WJya)!
-
 ## 📚 Essential Resources
 
 ### Documentation
+
 - [Microsoft SMB Documentation](https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview) - Official SMB reference
 - [Samba Wiki](https://wiki.samba.org/) - Comprehensive Samba documentation
 - [Samba AD DC HOWTO](https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller) - Step-by-step AD DC setup
 - [MS-SMB2 Protocol Specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/) - Deep protocol details
 
 ### Tools and Software
+
 - **Samba** - Open-source SMB server and AD DC
 - **Wireshark** - Analyze SMB traffic and troubleshoot connectivity
 - **smbclient** - Command-line SMB client for Linux
@@ -198,49 +203,15 @@ Before starting this path, you should:
 - **CrackMapExec** - Network auditing tool for AD/SMB environments (authorized testing only)
 
 ### Practice Labs
+
 - **Home Lab** - VirtualBox/KVM with Linux servers and Windows clients
 - **TryHackMe** - SMB and Active Directory rooms for hands-on practice
 - **HackTheBox** - Machines with SMB-based attack vectors for security training
 
-## 🤝 Community and Support
-
-**[Join TWN Commons](https://discord.gg/kgaMm6WJya)** for help with:
-- **#networking** - File sharing protocol questions and discussions
-- **#lab-help** - Assistance with Samba configuration and AD setup
-- **#cybersecurity** - SMB security hardening and auditing
-- **#study-groups** - Find study partners working through the same milestones
-
-**🎯 Community Challenges:**
-- **Samba Build-Off** - Deploy the most feature-complete Samba server and share your config
-- **AD Lab Showcase** - Build a full AD environment with file shares, GPOs, and auditing
-- **Security Audit Challenge** - Scan and harden a deliberately misconfigured SMB server
-- **Architecture Design Review** - Submit multi-site file sharing designs for community feedback
-
-## 🌉 Bridge to TWN Systems
-
-As you master file sharing, you unlock the ability to build truly sovereign data infrastructure:
-
-> [!NOTE] Digital Infrastructure Independence
-> Understanding file sharing lets you:
-> - **Replace cloud storage** with self-hosted Samba or NFS servers you fully control
-> - **Maintain data sovereignty** by keeping files on infrastructure you own
-> - **Eliminate vendor lock-in** using open protocols and open-source software
-> - **Build privacy-preserving collaboration** without routing data through third-party services
-
-**🛠️ Practice with TWN Tools:**
-- **Self-hosted file servers** - Deploy Samba on sovereignty-respecting hosting from the [TWN Provider Directory](https://twn.systems)
-- **Nextcloud + SMB** - Combine Nextcloud's web interface with SMB backend storage for the best of both worlds
-- **Encrypted backups** - Use SMB shares as backup targets with client-side encryption
-
-**🏗️ Apply Your Skills with TWN Providers:**
-- **Sovereign file hosting** - Deploy file servers on providers that don't inspect your data
-- **Self-hosted Active Directory** - Run Samba AD DC instead of Azure AD for full control
-- **Private collaboration** - Build team file sharing without Microsoft 365 or Google Workspace dependency
-- **Community file infrastructure** - Help others in the TWN Commons set up their own file servers
-
 ## 🚀 What's Next?
 
 After completing this path, you'll be ready for:
+
 - **[[paths/linux|Linux Systems]]** - Deepen your server administration skills
 - **[[paths/sre|Site Reliability Engineering]]** - Manage file services at scale with monitoring and automation
 - **Advanced Active Directory** - Multi-forest trusts, fine-grained password policies, AD Certificate Services
@@ -250,6 +221,7 @@ After completing this path, you'll be ready for:
 ## 🏆 Certification Alignment
 
 This learning path provides preparation for:
+
 - **CompTIA Server+** - File server administration and storage concepts
 - **CompTIA Security+** - Network protocol security including SMB
 - **Microsoft Certified: Windows Server Hybrid Administrator** - File services and AD integration
@@ -263,16 +235,16 @@ This learning path provides preparation for:
 
 ## 🔍 Path Quality Assurance
 
-**✅ Community Validated:** This learning path has been reviewed by system administrators and infrastructure engineers in the TWN community.
+**✅ Community Validated:** This learning path has been reviewed by system administrators and infrastructure engineers.
 
 **🧪 Lab Tested:** All hands-on exercises are designed for common lab environments (VirtualBox, KVM, or physical hardware).
 
-**📈 Actively Maintained:** Content is updated based on protocol changes, community feedback, and learner progress.
+**📈 Actively Maintained:** Content is updated based on protocol changes and learner feedback.
 
 **👥 Peer Reviewed:** Technical accuracy validated by professionals working with file sharing infrastructure in production environments.
 
-*Last updated: March 2026 | Version 1.0*
+_Last updated: March 2026 | Version 1.0_
 
 ---
 
-**Ready to start?** Begin with Milestone 1 and join the [TWN Commons networking channel](https://discord.gg/kgaMm6WJya) for support and community.
+**Ready to start?** Begin with Milestone 1.

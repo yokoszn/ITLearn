@@ -9,17 +9,17 @@ draft: true
 
 # Linux Systems Learning Path
 
-*This learning path is under development.*
+_This learning path is under development._
 
 Master command line operations, system administration, and server management on Linux systems. Build the foundation for DevOps, SRE, and systems engineering roles.
 
 > [!TIP] Coming Soon
-> This structured learning path is being developed. In the meantime, check out our existing Linux content in [[01 Computing Fundamentals]] and join the [TWN Commons](https://discord.gg/kgaMm6WJya) **#linux** channel for community support.
+> This structured learning path is being developed. In the meantime, check out our existing Linux content in [[01 Computing Fundamentals]].
 
 ## What You'll Learn
 
 - Command line proficiency and shell scripting
-- User and permission management  
+- User and permission management
 - Process monitoring and system resources
 - Package management and software installation
 - Network configuration and troubleshooting
@@ -33,4 +33,4 @@ Master command line operations, system administration, and server management on 
 
 ---
 
-Want to contribute to this learning path? Join the discussion in [TWN Commons](https://discord.gg/kgaMm6WJya).
+Want to contribute to this learning path? Open an issue or pull request.
